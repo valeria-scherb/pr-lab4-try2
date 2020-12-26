@@ -17,6 +17,8 @@ class Board:
         valid = True
         for i in to9:
             for j in to9:
+                if self.brd[j][i] == 0:
+                    continue
                 valid &= (self.brd[j][i] in self.ar[j]) \
                      and (self.brd[j][i] in self.ac[i]) \
                      and (self.brd[j][i] in self.aq[j//3][i//3])
