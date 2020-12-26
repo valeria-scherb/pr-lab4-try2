@@ -15,7 +15,8 @@ class TestSolver(unittest.TestCase):
         s = Solver()
         s_exp, s_sol = s.solve(inp)
         self.assertEqual(exp, s_exp)
-        self.assertEqual(sol, s_sol)
+        if exp == "solved":
+            self.assertEqual(sol, s_sol)
 
     def test_good(self):
         self._test_board("good")

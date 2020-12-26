@@ -58,10 +58,11 @@ class Board:
                 p = self.possible(i, j)
                 if p is not None:
                     if len(p) == 0:
-                        return False, False, False
+                        return False
                     if len(p) == 1:
                         self.unsafe_set(i, j, min(p))
                         return i, j, min(p)
+        return True
 
     def solved(self):
         return max([len(x) for x in self.ar] + [len(x) for x in self.ac]) == 0

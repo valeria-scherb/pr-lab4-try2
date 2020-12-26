@@ -5,4 +5,13 @@ class Solver:
         b = Board(inp)
         if not b.valid:
             return "refuse", None
-        return "notimpl", None
+        while True:
+            t = b.apply_unconditional()
+            if type(t) == bool:
+                if t:
+                    if b.solved():
+                        return "solved", b.brd
+                    else:
+                        return "giveup", b.brd
+                else:
+                    return "giveup", None
