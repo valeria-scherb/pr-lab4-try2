@@ -30,9 +30,9 @@ class Solver:
                 else:
                     if loud:
                         print('Found impossible constraint set')
-                        b.print()
+                        b.evident(b.ic[0], b.ic[1])
                         print()
-                    return "giveup", None
+                    return "refuse", ['Found a cell with no possible values']
             i, j, k = t
             if loud:
                 print('Applied ' + str(k) + ' in cell (' +

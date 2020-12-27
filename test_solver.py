@@ -29,3 +29,6 @@ class TestSolver(unittest.TestCase):
 
     def test_empty(self):
         self._test_board("empty")
+
+    def test_terrible(self):
+        self._test_board("terrible")

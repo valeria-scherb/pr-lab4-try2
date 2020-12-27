@@ -32,6 +32,7 @@ class Board:
                 self.aq[j//3][i//3] -= {b}
         self.valid = len(bad) == 0
         self.bad = bad
+        self.ic = None
 
     def print(self):
         for r in self.brd:
@@ -80,6 +81,7 @@ class Board:
                 p = self.possible(i, j)
                 if p is not None:
                     if len(p) == 0:
+                        self.ic = i, j
                         return False
                     if len(p) == 1:
                         self.unsafe_set(i, j, min(p))
