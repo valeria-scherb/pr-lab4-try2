@@ -12,7 +12,7 @@ with open(sys.argv[1], 'r') as f:
         inp = inp['board']
 
 s = Solver()
-res, sol = s.solve(inp)
+res, sol = s.solve(inp, True)
 if res == "solved":
     print("Solution found!")
     Board(sol).print()
