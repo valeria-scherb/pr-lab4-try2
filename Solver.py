@@ -4,7 +4,7 @@ class Solver:
     def solve(self, inp):
         b = Board(inp)
         if not b.valid:
-            return "refuse", None
+            return "refuse", b.bad
         while True:
             t = b.apply_unconditional()
             if type(t) == bool:
@@ -14,4 +14,4 @@ class Solver:
                     else:
                         return "giveup", b.brd
                 else:
-                    return "giveup", None
+                    return "giveup", b.brd
