@@ -37,5 +37,5 @@ class Solver:
             if loud:
                 print('Applied ' + str(k) + ' in cell (' +
                       str(i+1) + ', ' + str(j+1) + ')')
-                b.print()
+                b.evident(i, j)
                 print()

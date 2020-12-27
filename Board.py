@@ -38,6 +38,22 @@ class Board:
             print(' '.join([('·' if x == 0 else str(x)) for x in r]))
         print()
 
+    def evident(self, ei, ej):
+        for j in to9:
+            if ej != j:
+                print(' ' + ' '.join([('·' if x == 0 else str(x))
+                                for x in self.brd[j]]))
+            else:
+                s = '' if ei == 0 else ' '
+                for i in to9:
+                    x = self.brd[j][i]
+                    if i == ei:
+                        s += '[' + ('·' if x == 0 else str(x)) + ']'
+                    else:
+                        s += ('·' if x == 0 else str(x)) + \
+                             (' ' if i != ei - 1 else '')
+                print(s)
+
     def possible(self, i, j):
         if self.brd[j][i] != 0:
             return None

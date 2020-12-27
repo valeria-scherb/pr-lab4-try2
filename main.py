@@ -18,12 +18,12 @@ if res == "solved":
     Board(sol).print()
     exit(0)
 elif res == "giveup":
-    print("I can't solve this puzzle")
+    print("I can't solve this puzzle!!!")
     print("Partial solution:")
     Board(sol).print()
     exit(1)
 elif res == "refuse":
-    print("The input is trash! Reasons:")
+    print("The input is trash!!! Reasons:")
     for r in list(set(sol)):  # Unique
         print(r)
     exit(1)
