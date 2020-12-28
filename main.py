@@ -19,7 +19,7 @@ if res == "solved":
     exit(0)
 elif res == "giveup":
     print("I can't solve this puzzle!!!")
-    print("Partial solution:")
+    print("Last state:")
     Board(sol).print()
     exit(1)
 elif res == "refuse":

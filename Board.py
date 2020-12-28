@@ -93,3 +93,13 @@ class Board:
 
     def dc(self):
         return copy.deepcopy(self)
+
+    def next_empty(self):
+        for j in to9:
+            for i in to9:
+                if self.get(i, j) == 0:
+                    return i, j
+        return None
+
+    def forbid(self, i, j, v):
+        self.f[j][i] |= {v}
