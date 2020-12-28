@@ -23,7 +23,9 @@ elif res == "giveup":
     Board(sol).print()
     exit(1)
 elif res == "refuse":
-    print("The input is unsolvable!!! Reasons:")
+    print("The input is unsolvable!!!")
+    Board(inp).print()
+    print("Reasons:")
     for r in list(set(sol)):  # Unique
         print(r)
     exit(1)
