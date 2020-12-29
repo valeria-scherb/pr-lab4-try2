@@ -13,24 +13,24 @@ class Board:
         self.ac = [fullSet.copy() for _ in to9]
         self.aq = [[fullSet.copy() for _ in to3] for _ in to3]
         # Enforce constraints
-        bad = []
+        # bad = []
         for i in to9:
             for j in to9:
                 b = self.brd[j][i]
                 if b == 0:
                     continue
-                if b not in self.ar[j]:
-                    bad.append('Multiple ' + str(b) + ' in row ' + str(j+1))
-                if b not in self.ac[i]:
-                    bad.append('Multiple ' + str(b) + ' in column ' + str(i+1))
-                if b not in self.aq[j//3][i//3]:
-                    bad.append('Multiple ' + str(b) + ' in quadrant (' +
-                               str(j//3+1) + ', ' + str(i//3+1) + ')')
+                # if b not in self.ar[j]:
+                #     bad.append('Multiple ' + str(b) + ' in row ' + str(j+1))
+                # if b not in self.ac[i]:
+                #     bad.append('Multiple ' + str(b) + ' in column ' + str(i+1))
+                # if b not in self.aq[j//3][i//3]:
+                #     bad.append('Multiple ' + str(b) + ' in quadrant (' +
+                #                str(j//3+1) + ', ' + str(i//3+1) + ')')
                 self.ar[j] -= {b}
                 self.ac[i] -= {b}
                 self.aq[j//3][i//3] -= {b}
-        self.valid = len(bad) == 0
-        self.bad = bad
+        # self.valid = len(bad) == 0
+        # self.bad = bad
         self.ic = None
 
     def print(self):
