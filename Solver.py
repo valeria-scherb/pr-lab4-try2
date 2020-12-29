@@ -7,11 +7,12 @@ class Solver:
             print('Input board:')
             b.print()
             print()
-        if not b.valid:
-            if loud:
-                print('Refusing to solve (bad data)\n')
-            return "refuse", b.bad
-        prev = pi = pj = None
+        # if not b.valid:
+        #     if loud:
+        #         print('Refusing to solve (bad data)\n')
+        #     return "refuse", b.bad
+        prev = None
+        tried = set()
         while True:
             t = b.apply_unconditional()
             if type(t) == bool:
@@ -37,11 +38,13 @@ class Solver:
                                 print()
                             return "giveup", b.brd
                         tryval = min(poss)
-                        b.forbid(pi, pj, tryval)
+                        # b.forbid(pi, pj, tryval)
+                        tried = {tryval}
                         prev = b.dc()
-                        b.unsafe_set(pi, pj, tryval)
+                        b.set(pi, pj, tryval)
                         if loud:
                             print('Attempting ' + str(tryval) + ' into (' + str(pi+1) + ', ' + str(pj+1) + ')')
+                            print('Possible: ' + str(poss))
                             b.evident(pi, pj)
                             print()
                         continue
@@ -51,9 +54,10 @@ class Solver:
                         b.evident(b.ic[0], b.ic[1])
                         print()
                     if prev is not None:
-                        print('Retrying mark at cell (' + str(pi+1) + ', ' + str(pj+1) + ')')
                         b = prev
-                        poss = b.possible(pi, pj)
+                        pi, pj = b.next_empty()
+                        print('Retrying mark at cell (' + str(pi + 1) + ', ' + str(pj + 1) + ')')
+                        poss = b.possible(pi, pj) - tried
                         if len(poss) == 0:
                             if loud:
                                 print('Cannot put anything into cell')
@@ -61,15 +65,17 @@ class Solver:
                                 print()
                             return "giveup", b.brd
                         tryval = min(poss)
-                        b.forbid(pi, pj, tryval)
+                        # b.forbid(pi, pj, tryval)
                         prev = b.dc()
-                        b.unsafe_set(pi, pj, tryval)
+                        b.set(pi, pj, tryval)
                         if loud:
                             print('Attempting ' + str(tryval) + ' into (' + str(pi+1) + ', ' + str(pj+1) + ')')
+                            print('Possible: ' + str(poss) + ', tried: ' + str(tried))
                             b.evident(pi, pj)
                             print()
+                        tried |= {tryval}  # For output move down
                         continue
-                    return "refuse", ['Found a cell with no possible values']
+                    return "giveup", b.brd
             i, j, k = t
             if loud:
                 print('Applied ' + str(k) + ' in cell (' +

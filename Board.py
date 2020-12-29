@@ -12,7 +12,6 @@ class Board:
         self.ar = [fullSet.copy() for _ in to9]
         self.ac = [fullSet.copy() for _ in to9]
         self.aq = [[fullSet.copy() for _ in to3] for _ in to3]
-        self.f = [[set() for _ in to9] for _ in to9]
         # Enforce constraints
         bad = []
         for i in to9:
@@ -58,7 +57,7 @@ class Board:
     def possible(self, i, j):
         if self.brd[j][i] != 0:
             return None
-        return (self.ar[j] & self.ac[i] & self.aq[j//3][i//3]) - self.f[j][i]
+        return self.ar[j] & self.ac[i] & self.aq[j // 3][i // 3]
 
     def get(self, i, j):
         return self.brd[j][i]
@@ -100,6 +99,3 @@ class Board:
                 if self.get(i, j) == 0:
                     return i, j
         return None
-
-    def forbid(self, i, j, v):
-        self.f[j][i] |= {v}
